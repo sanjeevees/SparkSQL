@@ -1,0 +1,16 @@
+
+---SPARK---
+var df = spark.read.json("Desktop/sampletwitterdata.csv")
+var dfweather=df.filter(df("text").contains("weather"))
+dfweather.count()
+
+df.registerTempTable("df")
+val dfweathercount=spark.sql("SELECT count(*) from df where text like '%weather%'")
+dfweathercount.show()
+
+
+Uploading file into HDFS system
+
+hdfs dfs -put sampletwitterdata.csv
+
+ #df.write.option("path", "Desktop").saveAsTable("t")
